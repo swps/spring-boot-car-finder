@@ -4,20 +4,15 @@ import com.dietsodasoftware.carfinder.model.VehicleOffering;
 import com.dietsodasoftware.carfinder.mvc.exception.HttpNotFoundError;
 import com.dietsodasoftware.carfinder.mvc.view.ListResults;
 import com.dietsodasoftware.carfinder.service.VehicleOfferingService;
-import com.google.common.collect.Maps;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * User: wendel.schultz
@@ -44,7 +39,7 @@ public class VehicleOfferingController {
     @ResponseBody
     public VehicleOffering loadOffering(@PathVariable("id") Long id){
 
-        final VehicleOffering offering = vehicleService.loadOffering(id);
+        final VehicleOffering offering = vehicleService.find(id);
 
         if(offering == null){
             throw new HttpNotFoundError("Unknown ID: " + id);
@@ -58,7 +53,7 @@ public class VehicleOfferingController {
     @ResponseBody
     public ListResults<VehicleOffering> list(){
 
-        List<VehicleOffering> offerings = vehicleService.list();
+        List<VehicleOffering> offerings = vehicleService.findAll();
 
         return new ListResults<VehicleOffering>(offerings);
 

@@ -27,11 +27,11 @@ public class VehicleOfferingService {
         return offering;
     }
 
-    public VehicleOffering loadOffering(Long id){
+    public VehicleOffering find(Long id){
         return offeringDbRepository.findOne(id);
     }
 
-    public List<VehicleOffering> list(){
+    public List<VehicleOffering> findAll(){
         return offeringDbRepository.findAll();
     }
 }
