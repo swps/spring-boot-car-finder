@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.util.List;
 
 /**
@@ -19,12 +20,13 @@ public class VehicleOffering {
 
     VehicleOffering(){}
 
-    public static VehicleOffering newOffering(String title, String description, Double price){
+    public static VehicleOffering newOffering(Vehicle vehicle, String title, String description, Double price){
         final VehicleOffering offering = new VehicleOffering();
 
         offering.title = title;
         offering.description = description;
         offering.price = price;
+        offering.vehicle = vehicle;
 
         return offering;
     }
@@ -42,6 +44,9 @@ public class VehicleOffering {
     @Column
     private Double price;
 
+    @ManyToOne
+    private Vehicle vehicle;
+
     public Long getId() {
         return id;
     }
@@ -56,6 +61,10 @@ public class VehicleOffering {
 
     public Double getPrice() {
         return price;
+    }
+
+    public Vehicle getVehicle() {
+        return vehicle;
     }
 
     @Override

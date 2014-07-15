@@ -1,5 +1,6 @@
 package com.dietsodasoftware.carfinder.service;
 
+import com.dietsodasoftware.carfinder.model.Vehicle;
 import com.dietsodasoftware.carfinder.model.VehicleOffering;
 import com.dietsodasoftware.carfinder.service.dao.VehicleOfferingDbRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +18,9 @@ public class VehicleOfferingService {
     @Autowired
     private VehicleOfferingDbRepository offeringDbRepository;
 
-    public VehicleOffering createOffering(String title, String description,Double price){
+    public VehicleOffering createOffering(Vehicle vehicle, String title, String description,Double price){
 
-        VehicleOffering offering = VehicleOffering.newOffering(title, description, price);
+        VehicleOffering offering = VehicleOffering.newOffering(vehicle, title, description, price);
 
         offering = offeringDbRepository.save(offering);
 
