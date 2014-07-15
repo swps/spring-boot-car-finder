@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:elasticsearch="http://www.infusionsoft.com/schema/elasticsearch"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+           http://www.infusionsoft.com/schema/elasticsearch
+           http://www.infusionsoft.com/schema/elasticsearch.xsd">
+
+    <elasticsearch:search-services-provider id="searchServicesProvider"
+                                            client-type="local">
+        <elasticsearch:local-config log-directory="#{search['search.log.path']}"
+                                    data-directory="#{search['search.data.path']}" />
+    </elasticsearch:search-services-provider>
+
+</beans>

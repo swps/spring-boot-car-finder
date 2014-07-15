@@ -59,6 +59,26 @@
             <artifactId>joda-time</artifactId>
         </dependency>
 
+        <!-- begin search integration -->
+
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+            <version>0.9.8</version>
+        </dependency>
+        <dependency>
+            <groupId>com.infusionsoft.search</groupId>
+            <artifactId>infusionsoft-search-api</artifactId>
+            <version>0.6.10</version>
+        </dependency>
+        <dependency>
+            <groupId>com.infusionsoft.search</groupId>
+            <artifactId>elasticsearch-infusionsoft-search-impl</artifactId>
+            <version>0.6.10</version>
+        </dependency>
+
+        <!-- end search integration -->
+
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
