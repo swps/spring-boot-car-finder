@@ -44,4 +44,8 @@ public class VehicleOfferingService {
     public List<VehicleOffering> findAll(){
         return offeringDbRepository.findAll();
     }
+
+    public List<VehicleOffering> findAll(Iterable<Long> ids){
+        return offeringDbRepository.findAll(ids);
+    }
 }

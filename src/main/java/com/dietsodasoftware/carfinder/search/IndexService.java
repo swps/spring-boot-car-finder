@@ -20,8 +20,8 @@ import java.util.Map;
 @Service
 public class IndexService {
 
-    private static final String CARFINDER_INDEX_NAME = "carfinder";
-    private static final String VEHICLE_OFFERING_TYPE_NAME = SchemaUtils.getDocumentType(VehicleOffering.class.getName());
+    static final String CARFINDER_INDEX_NAME = "carfinder";
+    static final String VEHICLE_OFFERING_TYPE_NAME = SchemaUtils.getDocumentType(VehicleOffering.class.getName());
 
     @Autowired
     private IndexingService indexer;

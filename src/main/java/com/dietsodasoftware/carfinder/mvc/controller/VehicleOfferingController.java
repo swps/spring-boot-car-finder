@@ -6,7 +6,11 @@ import com.dietsodasoftware.carfinder.mvc.exception.HttpInvalidRequestError;
 import com.dietsodasoftware.carfinder.mvc.exception.HttpNotFoundError;
 import com.dietsodasoftware.carfinder.mvc.exception.HttpServerError;
 import com.dietsodasoftware.carfinder.mvc.view.ListResults;
+import com.dietsodasoftware.carfinder.mvc.view.VehicleOfferingSearch;
 import com.dietsodasoftware.carfinder.mvc.view.VehicleOfferingSubmission;
+import com.dietsodasoftware.carfinder.search.IndexService;
+import com.dietsodasoftware.carfinder.search.SearchResult;
+import com.dietsodasoftware.carfinder.search.SearchService;
 import com.dietsodasoftware.carfinder.service.VehicleOfferingService;
 import com.dietsodasoftware.carfinder.service.VehicleService;
 import com.infusionsoft.search.api.InfusionsoftSearchException;
@@ -33,6 +37,9 @@ public class VehicleOfferingController {
 
     @Autowired
     private VehicleOfferingService vehicleOfferingService;
+
+    @Autowired
+    private SearchService searcher;
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
@@ -81,5 +88,19 @@ public class VehicleOfferingController {
 
         return new ListResults<VehicleOffering>(offerings);
 
+    }
+
+    @RequestMapping(value = "/search", method = {RequestMethod.GET, RequestMethod.POST})
+    @ResponseBody
+    public SearchResult<VehicleOffering> search(@RequestBody VehicleOfferingSearch term){
+
+        final SearchResult<VehicleOffering> found;
+        try {
+            found = searcher.searchForOffering(term.getQ());
+        } catch (InfusionsoftSearchException e) {
+            throw new HttpServerError(e, "Can't find vehicle offering");
+        }
+
+        return found;
     }
 }
