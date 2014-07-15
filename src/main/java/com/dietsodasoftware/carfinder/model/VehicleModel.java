@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 /**
@@ -16,51 +14,57 @@ import javax.persistence.ManyToOne;
  * Date: 7/14/14
  */
 @Entity
-public class Vehicle {
-
-    Vehicle(){}
-
-    public Vehicle(String year){
-        this.year = year;
-    }
+public class VehicleModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne
-    private VehicleModel model;
-
     @Column
-    private String year;
+    private String name;
+
+    @ManyToOne
+    private VehicleMake make;
+
+    @ManyToOne
+    private VehicleStyle style;
 
     public Long getId() {
         return id;
     }
 
-    public VehicleModel getModel() {
-        return model;
+    public String getName() {
+        return name;
     }
 
-    public void setModel(VehicleModel style) {
-        this.model = style;
+    public VehicleModel setName(String name) {
+        this.name = name;
+        return this;
     }
 
-    public String getYear() {
-        return year;
+    public VehicleMake getMake() {
+        return make;
     }
 
-    public void setYear(String year) {
-        this.year = year;
+    public VehicleModel setMake(VehicleMake make) {
+        this.make = make;
+        return this;
     }
 
+    public VehicleStyle getStyle() {
+        return style;
+    }
+
+    public VehicleModel setStyle(VehicleStyle style) {
+        this.style = style;
+        return this;
+    }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .append("id", id)
-                .append("model", model)
-                .append("year", year)
+                .append("name", name)
                 .toString();
     }
 }

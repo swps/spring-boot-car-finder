@@ -8,21 +8,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class VehicleSubmission {
 
-    @JsonProperty("vehicle_make_id")
-    private Long vehicleMakeId;
-
-    @JsonProperty("vehicle_style_id")
-    private Long vehicleStyleId;
+    @JsonProperty("vehicle_model_id")
+    private Long vehicleModelId;
 
     @JsonProperty
     private String year;
 
-    public Long getVehicleMakeId() {
-        return vehicleMakeId;
-    }
-
-    public Long getVehicleStyleId() {
-        return vehicleStyleId;
+    public Long getVehicleModelId() {
+        return vehicleModelId;
     }
 
     public String getYear() {

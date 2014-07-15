@@ -2,6 +2,7 @@ package com.dietsodasoftware.carfinder.service;
 
 import com.dietsodasoftware.carfinder.model.Vehicle;
 import com.dietsodasoftware.carfinder.model.VehicleMake;
+import com.dietsodasoftware.carfinder.model.VehicleModel;
 import com.dietsodasoftware.carfinder.model.VehicleStyle;
 import com.dietsodasoftware.carfinder.service.dao.VehicleDbRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +20,10 @@ public class VehicleService {
     @Autowired
     private VehicleDbRepository repo;
 
-    public Vehicle createVehicle(VehicleMake make, VehicleStyle style, String year){
+    public Vehicle createVehicle(VehicleModel model, String year){
 
         Vehicle v = new Vehicle(year);
-        v.setMake(make);
-        v.setStyle(style);
+        v.setModel(model);
 
         v = repo.save(v);
 

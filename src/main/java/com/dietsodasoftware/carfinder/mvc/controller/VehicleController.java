@@ -2,11 +2,13 @@ package com.dietsodasoftware.carfinder.mvc.controller;
 
 import com.dietsodasoftware.carfinder.model.Vehicle;
 import com.dietsodasoftware.carfinder.model.VehicleMake;
+import com.dietsodasoftware.carfinder.model.VehicleModel;
 import com.dietsodasoftware.carfinder.model.VehicleStyle;
 import com.dietsodasoftware.carfinder.mvc.exception.HttpInvalidRequestError;
 import com.dietsodasoftware.carfinder.mvc.view.ListResults;
 import com.dietsodasoftware.carfinder.mvc.view.VehicleSubmission;
 import com.dietsodasoftware.carfinder.service.VehicleMakeService;
+import com.dietsodasoftware.carfinder.service.VehicleModelService;
 import com.dietsodasoftware.carfinder.service.VehicleService;
 import com.dietsodasoftware.carfinder.service.VehicleStyleService;
 import com.google.common.base.Strings;
@@ -30,40 +32,27 @@ public class VehicleController {
     private VehicleService vehicleService;
 
     @Autowired
-    private VehicleMakeService vehicleMakeService;
-
-    @Autowired
-    private VehicleStyleService vehicleStyleService;
+    private VehicleModelService vehicleModelService;
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
     public Vehicle createVehicle(@RequestBody VehicleSubmission submission){
 
-        if(submission.getVehicleMakeId() == null){
-            throw new HttpInvalidRequestError("Missing vehicle make ID");
-        }
-
-        if(submission.getVehicleStyleId() == null){
-            throw new HttpInvalidRequestError("Missing vehicle style ID");
+        if(submission.getVehicleModelId() == null){
+            throw new HttpInvalidRequestError("Missing vehicle model ID");
         }
 
         if(submission.getYear() == null){
             throw new HttpInvalidRequestError("Missing vehicle year");
         }
 
-        VehicleMake make = vehicleMakeService.find(submission.getVehicleMakeId());
+        VehicleModel model = vehicleModelService.find(submission.getVehicleModelId());
 
-        if(make == null){
-            throw new HttpInvalidRequestError("Unknown vehicle make id: " + submission.getVehicleMakeId());
+        if(model == null){
+            throw new HttpInvalidRequestError("Unknown vehicle model id: " + submission.getVehicleModelId());
         }
 
-        VehicleStyle style = vehicleStyleService.find(submission.getVehicleStyleId());
-
-        if(style == null){
-            throw new HttpInvalidRequestError("Unknown vehicle style id: " + submission.getVehicleStyleId());
-        }
-
-        return vehicleService.createVehicle(make, style, submission.getYear());
+        return vehicleService.createVehicle(model, submission.getYear());
 
     }
 
