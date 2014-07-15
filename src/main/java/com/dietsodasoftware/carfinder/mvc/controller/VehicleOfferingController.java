@@ -2,6 +2,7 @@ package com.dietsodasoftware.carfinder.mvc.controller;
 
 import com.dietsodasoftware.carfinder.model.VehicleOffering;
 import com.dietsodasoftware.carfinder.mvc.exception.HttpNotFoundError;
+import com.dietsodasoftware.carfinder.mvc.view.ListResults;
 import com.dietsodasoftware.carfinder.service.VehicleOfferingService;
 import com.google.common.collect.Maps;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,15 +56,11 @@ public class VehicleOfferingController {
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
-    public Map list(){
+    public ListResults<VehicleOffering> list(){
 
         List<VehicleOffering> offerings = vehicleService.list();
 
-        Map list = Maps.newHashMap();
-
-        list.put("offerings", offerings);
-
-        return list;
+        return new ListResults<VehicleOffering>(offerings);
 
     }
 }
